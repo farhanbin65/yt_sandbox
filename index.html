@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="halloween">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>YT SandBox</title>
+
+    <link rel="icon" type="image/png" href="logo.png" />
+
+    <!-- Tailwind + DaisyUI -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" />
+
+    <!-- YouTube API (UNCHANGED) -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <!-- Google Analytics (UNCHANGED) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZPMC525FGT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZPMC525FGT');
+    </script>
+
+    <!-- Adsense (UNCHANGED) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7020422718957281" crossorigin="anonymous"></script>
+</head>
+
+<body class="min-h-screen bg-base-200">
+
+<!-- HEADER -->
+<header class="navbar bg-base-100 shadow-md sticky top-0 z-50 px-6">
+    <div class="flex-1">
+        <a class="text-xl font-bold text-primary">YT SandBox</a>
+    </div>
+
+    <div class="flex gap-4">
+        <a href="https://github.com/pooreyoutuber" target="_blank" class="btn btn-ghost btn-sm">
+            Inspiration
+        </a>
+    </div>
+</header>
+
+<!-- MAIN -->
+<div class="max-w-6xl mx-auto p-4 space-y-6">
+
+    <!-- HERO CARD -->
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body text-center">
+
+            <h1 class="text-3xl font-bold">
+                SandBox Your YouTube Views
+            </h1>
+
+            <p class="text-base-content/70">
+                paste your YouTube URL, select viewers, and generate multiple players to test engagement and performance.
+            </p>
+
+            <div class="alert alert-info mt-4 text-sm">
+                Tip: load all videos fully to ensure accurate analytics. Refresh your YouTube Studio after 24–48 hours to see results.
+            </div>
+
+            <!-- INPUTS -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mt-5">
+
+                <input id="videoUrl" type="text" placeholder="YouTube URL"
+                    class="input input-bordered w-full md:col-span-2" />
+
+                <input id="viewCount" type="number" value="4" min="1" max="50"
+                    class="input input-bordered w-full" />
+
+                <select id="audioSetting" class="select select-bordered w-full">
+                    <option value="1">Mute Audio</option>
+                    <option value="0">Sound On</option>
+                </select>
+
+                <select id="autoplaySetting" class="select select-bordered w-full">
+                    <option value="1">Autoplay ON</option>
+                    <option value="0">Autoplay OFF</option>
+                </select>
+
+                <button onclick="startMultiView()" class="btn btn-primary w-full">
+                    Generate
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+  
+
+    <!-- PLAYER GRID -->
+    <div id="players" class="grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+
+    <!-- CONTENT -->
+    <div class="card bg-base-100 shadow-xl border border-base-300">
+
+    <div class="card-body space-y-6">
+
+        <!-- HEADER -->
+        <div>
+            <h2 class="text-2xl font-bold">How to Use</h2>
+            <p class="text-base-content/60 text-sm">
+                Quick guide to get started in seconds
+            </p>
+        </div>
+
+        <!-- WARNING -->
+        <div class="alert alert-warning shadow-sm">
+            <span>
+                ⚠️ YouTube analytics may take 24–48 hours to update fully.
+            </span>
+        </div>
+
+        <!-- STEPS -->
+        <div class="grid gap-3">
+
+            <div class="flex gap-3 items-start">
+                <div class="badge badge-primary badge-lg">1</div>
+                <p>Paste your YouTube video or Shorts URL</p>
+            </div>
+
+            <div class="flex gap-3 items-start">
+                <div class="badge badge-primary badge-lg">2</div>
+                <p>Select how many viewer windows you want</p>
+            </div>
+
+            <div class="flex gap-3 items-start">
+                <div class="badge badge-primary badge-lg">3</div>
+                <p>Click <span class="font-semibold text-primary">Generate</span> to start players</p>
+            </div>
+
+        </div>
+
+        <!-- DIVIDER -->
+        <div class="divider"></div>
+
+        <!-- WHY SECTION -->
+        <div class="bg-base-200 p-4 rounded-xl">
+
+            <h3 class="text-lg font-semibold mb-2">
+                Why this tool?
+            </h3>
+
+            <p class="text-base-content/70 leading-relaxed">
+                Built for creators to test video performance and engagement in a controlled environment.
+                It helps simulate multi-view scenarios so you can analyze retention, loading behavior,
+                and early-stage content performance strategies.
+            </p>
+
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer footer-center p-6 bg-base-100 text-base-content">
+    <p>© 2026 YT SandBox</p>
+</footer>
+
+</body>
+</html>
+<script>
+    function getID(url) {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    function startMultiView() {
+        const url = document.getElementById('videoUrl').value;
+        const count = document.getElementById('viewCount').value;
+        const isMuted = document.getElementById('audioSetting').value=== "1";
+        const videoId = getID(url);
+        const playerContainer = document.getElementById('players');
+        const autoPlayStatus = document.getElementById('autoplaySetting').value;
+        
+const platforms = [
+             "https://www.youtube.com/feed/trending",
+             "https://www.youtube.com/feed/subscriptions",
+               "https://m.youtube.com/",
+              "https://www.youtube.com/results?search_query=shorts",
+            "https://www.youtube.com/search",
+            "https://www.google.com",
+            "https://www.facebook.com",
+            "https://www.instagram.com",
+            "https://t.co", 
+            "https://www.bing.com"
+        ];
+        if (!videoId) {
+            alert("Please enter a valid YouTube URL");
+            return;
+        }
+        playerContainer.innerHTML = '';
+        playerContainer.style.display = 'grid';
+        for (let i = 0; i < count; i++) {
+      
+            setTimeout(() => {
+                let playerId = 'player-' + i;
+                let div = document.createElement('div');
+                div.id = playerId;
+                
+                const randomRef = platforms[Math.floor(Math.random() * platforms.length)];
+                const randomStart = Math.floor(Math.random() * 15);
+                const cacheBuster = Math.random().toString(36).substring(7); 
+                
+                const iframe = document.createElement('iframe');
+                iframe.width = "100%";
+                iframe.height = "100%";
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=${autoPlayStatus}&mute=${isMuted ? 1 : 0}&start=${randomStart}&rel=0&modestbranding=1&widget_referrer=${randomRef}`;
+                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            
+                iframe.setAttribute('allowfullscreen', 'true');
+                iframe.style.border = "none";
+                iframe.style.borderRadius = "12px";
+                
+                div.appendChild(iframe);
+                playerContainer.appendChild(div);
+            }, i * 1500); 
+        }
+    }
+</script>
+</body>
+</html>
