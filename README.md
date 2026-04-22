@@ -1,6 +1,6 @@
 # 🎬 YT SandBox
 
-A browser-based multi-instance YouTube player built with vanilla JavaScript, Tailwind CSS, and DaisyUI.
+A browser-based multi screen YouTube player built with vanilla JavaScript, Tailwind CSS, and DaisyUI.
 This project was created as a frontend learning exercise exploring iframe embedding, DOM manipulation,
 randomisation techniques, and UI component design.
 
