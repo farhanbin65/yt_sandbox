@@ -4,6 +4,10 @@ A browser-based multi screen YouTube player built with vanilla JavaScript, Tailw
 This project was created as a frontend learning exercise exploring iframe embedding, DOM manipulation,
 randomisation techniques, and UI component design.
 
+## 🌐 Live Demo
+
+👉 [https://ytsandbox.netlify.app](https://ytsandbox.netlify.app)
+
 ---
 
 ## 📚 What This Project Teaches
@@ -172,7 +176,7 @@ No installation needed. Open `index.html` directly in a browser, or deploy to an
 
 Built by **Team Keo** — a final-year Computing Systems student project exploring frontend JavaScript and browser-based media tooling.
 
-Credit & inspiration: https://github.com/pooreyoutuber
+Credit & inspiration: https://github.com/pooreyoutuber  
 
 ---
 
